@@ -1,18 +1,39 @@
-// Funkcja przełączająca motyw między dziennym a nocnym
+// Poczekaj aż DOM zostanie załadowany
+document.addEventListener("DOMContentLoaded", function() {
+  // Przycisk przełączający motyw
+  const themeToggleBtn = document.querySelector('.theme-toggle');
+  themeToggleBtn.addEventListener('click', toggleTheme);
+
+  // Kliknięcie w kafelek CV
+  const cvTile = document.getElementById('cv-tile');
+  cvTile.addEventListener('click', function() {
+    window.location.href = 'https://pawelwyb.github.io/moje-cv/';
+  });
+
+  // Obsługa kliknięć na strzałki galerii
+  document.querySelectorAll('.gallery-nav').forEach(function(nav) {
+    nav.addEventListener('click', function() {
+      const galleryId = parseInt(this.getAttribute('data-gallery'));
+      const action = this.getAttribute('data-action');
+      if (action === 'next') {
+        nextImage(galleryId);
+      } else {
+        prevImage(galleryId);
+      }
+    });
+  });
+});
+
+// Funkcja przełączająca motyw dzienny/nocny
 function toggleTheme() {
   document.body.classList.toggle('night');
   document.getElementById('main-header').classList.toggle('night');
-  // Dodajemy klasę trybu nocnego do wszystkich paneli
   document.querySelectorAll('.panel').forEach(function(panel) {
     panel.classList.toggle('night');
   });
   // Zmiana tekstu przycisku
-  var toggleBtn = document.querySelector('.theme-toggle');
-  if(document.body.classList.contains('night')) {
-    toggleBtn.textContent = 'Tryb dzienny';
-  } else {
-    toggleBtn.textContent = 'Tryb nocny';
-  }
+  const toggleBtn = document.querySelector('.theme-toggle');
+  toggleBtn.textContent = document.body.classList.contains('night') ? 'Tryb dzienny' : 'Tryb nocny';
 }
 
 // Obiekt przechowujący listy zdjęć dla każdej galerii
@@ -33,20 +54,27 @@ const currentImageIndex = {
   5: 0
 };
 
-// Funkcja przechodząca do następnego zdjęcia w galerii
+// Funkcja przechodząca do następnego zdjęcia
 function nextImage(galleryId) {
   currentImageIndex[galleryId]++;
   if (currentImageIndex[galleryId] >= galleries[galleryId].length) {
     currentImageIndex[galleryId] = 0;
   }
-  document.querySelector('#gallery' + galleryId + ' img').src = galleries[galleryId][currentImageIndex[galleryId]];
+  updateGalleryImage(galleryId);
 }
 
-// Funkcja przechodząca do poprzedniego zdjęcia w galerii
+// Funkcja przechodząca do poprzedniego zdjęcia
 function prevImage(galleryId) {
   currentImageIndex[galleryId]--;
   if (currentImageIndex[galleryId] < 0) {
     currentImageIndex[galleryId] = galleries[galleryId].length - 1;
   }
-  document.querySelector('#gallery' + galleryId + ' img').src = galleries[galleryId][currentImageIndex[galleryId]];
+  updateGalleryImage(galleryId);
+}
+
+// Aktualizacja obrazu w galerii
+function updateGalleryImage(galleryId) {
+  const galleryContainer = document.getElementById("gallery" + galleryId);
+  const imgElement = galleryContainer.querySelector("img");
+  imgElement.src = galleries[galleryId][currentImageIndex[galleryId]];
 }
