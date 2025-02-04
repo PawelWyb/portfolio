@@ -1,12 +1,29 @@
-/* ============== GLOBALNE STYLE I ANIMACJA TŁA ============== */
-body {
+/* ============== GLOBAL ============== */
+:root {
+  --primary-color: #4B0082;
+  --secondary-color: #FF69B4;
+  --dark-bg: #1a1a2e;
+  --dark-accent: #b21f1f;
+  --text-light: #ffffff;
+  --text-dark: #333333;
+  --transition-speed: 0.3s;
+}
+
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(45deg, #4B0082, #FF69B4);
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  line-height: 1.6;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
   background-size: 400% 400%;
   animation: gradientAnimation 15s ease infinite;
-  transition: background 0.5s ease;
+  color: var(--text-light);
+  min-height: 100vh;
+  transition: background var(--transition-speed) ease;
 }
 
 @keyframes gradientAnimation {
@@ -15,108 +32,103 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* ============== STYLE NAGŁÓWKA ============== */
-header {
-  background-color: #333;
-  color: white;
-  padding: 20px;
+/* ============== HEADER ============== */
+#main-header {
+  background: rgba(51, 51, 51, 0.95);
+  padding: 1.5rem;
   display: flex;
   flex-wrap: wrap;
+  gap: 2rem;
   align-items: center;
   justify-content: space-between;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-header .profile {
+.profile {
   display: flex;
   align-items: center;
+  gap: 1rem;
 }
 
-header .profile img {
+.profile img {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  margin-right: 20px;
+  object-fit: cover;
+  border: 2px solid var(--text-light);
 }
 
-header .info {
-  font-size: 18px;
-}
-
-nav.contact-links ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.contact-links ul {
   display: flex;
+  gap: 1.5rem;
+  list-style: none;
 }
 
-nav.contact-links li {
-  margin-right: 10px;
-}
-
-nav.contact-links a {
-  color: white;
+.contact-links a {
+  color: var(--text-light);
   text-decoration: none;
-}
-
-header .cv-tile {
-  background-color: #555;
-  padding: 20px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-header .cv-tile:hover {
-  background-color: #777;
-}
-
-/* ============== PRZEŁĄCZNIK MOTYWU ============== */
-.theme-toggle {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  background-color: #555;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  z-index: 1000;
-}
-
-/* ============== STYLE PANELI ============== */
-.panel {
-  background-color: #444;
-  margin: 40px;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 0.5rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  gap: 0.5rem;
+  transition: opacity var(--transition-speed);
 }
 
-.panel.left {
-  flex-direction: row;
+.contact-links a:hover {
+  opacity: 0.8;
 }
 
-.panel.right {
-  flex-direction: row-reverse;
+.cv-tile {
+  background: rgba(85, 85, 85, 0.9);
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background var(--transition-speed);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cv-tile:hover {
+  background: rgba(119, 119, 119, 0.9);
+}
+
+/* ============== PANELS ============== */
+main {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.panel {
+  background: rgba(68, 68, 68, 0.9);
+  border-radius: 15px;
+  padding: 2rem;
+  margin: 2rem 0;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
 .panel h2 {
-  color: #fff;
-  width: 30%;
-  margin: 0;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-light);
+  text-align: center;
 }
 
 .gallery-container {
   position: relative;
-  width: 60%;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 1rem 0;
 }
 
 .gallery-container img {
   width: 100%;
+  height: 500px;
+  object-fit: cover;
+  transition: opacity var(--transition-speed);
   border-radius: 10px;
 }
 
@@ -124,66 +136,106 @@ header .cv-tile:hover {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 30px;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 10px;
+  background: rgba(0,0,0,0.6);
+  color: var(--text-light);
+  border: none;
+  padding: 1rem 1.5rem;
+  font-size: 1.5rem;
   cursor: pointer;
-  border-radius: 50%;
+  transition: background var(--transition-speed);
+  z-index: 10;
 }
 
-.gallery-nav.left {
-  left: 10px;
+.gallery-nav:hover {
+  background: rgba(0,0,0,0.9);
 }
 
-.gallery-nav.right {
-  right: 10px;
-}
+.gallery-nav.left { left: 0; border-radius: 0 10px 10px 0; }
+.gallery-nav.right { right: 0; border-radius: 10px 0 0 10px; }
 
 .panel-description {
-  color: #ddd;
-  margin: 10px 40px;
   text-align: center;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  color: #dddddd;
   font-style: italic;
-  width: 100%;
 }
 
-/* ============== RESPONSYWNOŚĆ ============== */
+/* ============== THEME TOGGLE ============== */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(85, 85, 85, 0.9);
+  color: var(--text-light);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+  transition: all var(--transition-speed);
+}
+
+.theme-toggle:hover {
+  background: rgba(119, 119, 119, 0.9);
+  transform: scale(1.05);
+}
+
+/* ============== NIGHT MODE ============== */
+body.night {
+  background: linear-gradient(45deg, var(--dark-bg), var(--dark-accent));
+}
+
+body.night .panel,
+body.night #main-header {
+  background: rgba(34, 34, 34, 0.95);
+}
+
+body.night .cv-tile {
+  background: rgba(68, 68, 68, 0.9);
+}
+
+/* ============== RESPONSIVE ============== */
+@media (max-width: 1200px) {
+  .gallery-container img {
+    height: 400px;
+  }
+}
+
 @media (max-width: 768px) {
+  main {
+    padding: 1rem;
+  }
+
   .panel {
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .gallery-container img {
+    height: 300px;
+  }
+
+  #main-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .contact-links ul {
     flex-direction: column;
   }
-  .panel h2,
-  .gallery-container {
-    width: 100%;
-  }
+}
+
+@media (max-width: 480px) {
   .gallery-nav {
-    font-size: 24px;
-    padding: 5px;
+    padding: 0.8rem;
+    font-size: 1.2rem;
   }
-}
 
-/* ============== TRYB NOCNY ============== */
-body.night {
-  background: linear-gradient(45deg, #1a1a2e, #b21f1f);
-  animation: gradientAnimationNight 15s ease infinite;
-}
-
-@keyframes gradientAnimationNight {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-header.night,
-.panel.night {
-  background-color: #222;
-}
-
-header.night .cv-tile {
-  background-color: #444;
-}
-
-header.night .cv-tile:hover {
-  background-color: #666;
+  .theme-toggle {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
 }
