@@ -25,24 +25,39 @@ header {
   align-items: center;
   justify-content: space-between;
 }
+
 header .profile {
   display: flex;
   align-items: center;
 }
+
 header .profile img {
   width: 80px;
   height: 80px;
   border-radius: 50%;
   margin-right: 20px;
 }
+
 header .info {
   font-size: 18px;
 }
-header .contact-links a {
-  color: white;
+
+nav.contact-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+nav.contact-links li {
   margin-right: 10px;
+}
+
+nav.contact-links a {
+  color: white;
   text-decoration: none;
 }
+
 header .cv-tile {
   background-color: #555;
   padding: 20px;
@@ -50,6 +65,7 @@ header .cv-tile {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
 header .cv-tile:hover {
   background-color: #777;
 }
@@ -77,55 +93,68 @@ header .cv-tile:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
+
 .panel.left {
   flex-direction: row;
 }
+
 .panel.right {
   flex-direction: row-reverse;
 }
+
 .panel h2 {
   color: #fff;
   width: 30%;
+  margin: 0;
 }
+
 .gallery-container {
   position: relative;
   width: 60%;
 }
+
 .gallery-container img {
   width: 100%;
   border-radius: 10px;
 }
+
 .gallery-nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   font-size: 30px;
   color: white;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   padding: 10px;
   cursor: pointer;
   border-radius: 50%;
 }
+
 .gallery-nav.left {
   left: 10px;
 }
+
 .gallery-nav.right {
   right: 10px;
 }
+
 .panel-description {
   color: #ddd;
   margin: 10px 40px;
   text-align: center;
   font-style: italic;
+  width: 100%;
 }
 
 /* ============== RESPONSYWNOŚĆ ============== */
-@media(max-width: 768px) {
+@media (max-width: 768px) {
   .panel {
     flex-direction: column;
   }
-  .panel h2, .gallery-container {
+  .panel h2,
+  .gallery-container {
     width: 100%;
   }
   .gallery-nav {
@@ -139,17 +168,22 @@ body.night {
   background: linear-gradient(45deg, #1a1a2e, #b21f1f);
   animation: gradientAnimationNight 15s ease infinite;
 }
+
 @keyframes gradientAnimationNight {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
-header.night, .panel.night {
+
+header.night,
+.panel.night {
   background-color: #222;
 }
+
 header.night .cv-tile {
   background-color: #444;
 }
+
 header.night .cv-tile:hover {
   background-color: #666;
 }
