@@ -1,52 +1,90 @@
-// Funkcja przełączająca motyw między dziennym a nocnym
+document.addEventListener('DOMContentLoaded', () => {
+  // Inicjalizacja
+  const themeToggle = document.querySelector('.theme-toggle');
+  const cvTile = document.getElementById('cv-tile');
+  const galleries = document.querySelectorAll('.gallery-container');
+
+  // Obsługa motywu
+  themeToggle.addEventListener('click', toggleTheme);
+
+  // Obsługa CV
+  cvTile.addEventListener('click', redirectToCV);
+  cvTile.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') redirectToCV();
+  });
+
+  // Inicjalizacja galerii
+  galleries.forEach((gallery, index) => {
+    const galleryId = index + 1;
+    initGallery(gallery, galleryId);
+  });
+});
+
 function toggleTheme() {
   document.body.classList.toggle('night');
-  document.getElementById('main-header').classList.toggle('night');
-  // Dodajemy klasę trybu nocnego do wszystkich paneli
-  document.querySelectorAll('.panel').forEach(function(panel) {
-    panel.classList.toggle('night');
+  document.querySelectorAll('.panel, #main-header').forEach(element => {
+    element.classList.toggle('night');
   });
-  // Zmiana tekstu przycisku
-  var toggleBtn = document.querySelector('.theme-toggle');
-  if(document.body.classList.contains('night')) {
-    toggleBtn.textContent = 'Tryb dzienny';
-  } else {
-    toggleBtn.textContent = 'Tryb nocny';
+  
+  const isNightMode = document.body.classList.contains('night');
+  localStorage.setItem('theme', isNightMode ? 'night' : 'light');
+  document.querySelector('.theme-toggle').textContent = isNightMode ? '🌞 Tryb dzienny' : '🌙 Tryb nocny';
+}
+
+function redirectToCV() {
+  window.location.href = 'https://pawelwyb.github.io/moje-cv/';
+}
+
+function initGallery(galleryElement, galleryId) {
+  const prevButton = galleryElement.querySelector('[data-action="prev"]');
+  const nextButton = galleryElement.querySelector('[data-action="next"]');
+  const imgElement = galleryElement.querySelector('img');
+  
+  const category = galleryElement.parentElement
+    .querySelector('h2').textContent
+    .toLowerCase()
+    .replace(/ /g, '_');
+
+  let currentIndex = 0;
+  const totalImages = 3; // Zakładając 3 obrazy na kategorię
+
+  function updateImage() {
+    imgElement.style.opacity = 0;
+    setTimeout(() => {
+      imgElement.src = `assets/${category}${currentIndex + 1}.jpg`;
+      imgElement.style.opacity = 1;
+    }, 300);
+  }
+
+  prevButton.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+    updateImage();
+  });
+
+  nextButton.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % totalImages;
+    updateImage();
+  });
+
+  // Zapisywanie stanu w localStorage
+  window.addEventListener('beforeunload', () => {
+    localStorage.setItem(`gallery_${galleryId}`, currentIndex);
+  });
+
+  // Przywracanie stanu
+  const savedIndex = localStorage.getItem(`gallery_${galleryId}`);
+  if (savedIndex !== null) {
+    currentIndex = parseInt(savedIndex);
+    updateImage();
   }
 }
 
-// Obiekt przechowujący listy zdjęć dla każdej galerii
-const galleries = {
-  1: ["assets/marketing1.jpg", "assets/marketing2.jpg", "assets/marketing3.jpg"],
-  2: ["assets/reklama1.jpg", "assets/reklama2.jpg", "assets/reklama3.jpg"],
-  3: ["assets/branding1.jpg", "assets/branding2.jpg", "assets/branding3.jpg"],
-  4: ["assets/social1.jpg", "assets/social2.jpg", "assets/social3.jpg"],
-  5: ["assets/druk1.jpg", "assets/druk2.jpg", "assets/druk3.jpg"]
-};
-
-// Aktualny indeks zdjęcia dla każdej galerii
-const currentImageIndex = {
-  1: 0,
-  2: 0,
-  3: 0,
-  4: 0,
-  5: 0
-};
-
-// Funkcja przechodząca do następnego zdjęcia w galerii
-function nextImage(galleryId) {
-  currentImageIndex[galleryId]++;
-  if (currentImageIndex[galleryId] >= galleries[galleryId].length) {
-    currentImageIndex[galleryId] = 0;
+// Inicjalizacja zapisanego motywu
+function initTheme() {
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  if (savedTheme === 'night') {
+    document.body.classList.add('night');
+    document.querySelector('.theme-toggle').textContent = '🌞 Tryb dzienny';
   }
-  document.querySelector('#gallery' + galleryId + ' img').src = galleries[galleryId][currentImageIndex[galleryId]];
 }
-
-// Funkcja przechodząca do poprzedniego zdjęcia w galerii
-function prevImage(galleryId) {
-  currentImageIndex[galleryId]--;
-  if (currentImageIndex[galleryId] < 0) {
-    currentImageIndex[galleryId] = galleries[galleryId].length - 1;
-  }
-  document.querySelector('#gallery' + galleryId + ' img').src = galleries[galleryId][currentImageIndex[galleryId]];
-}
+initTheme();
