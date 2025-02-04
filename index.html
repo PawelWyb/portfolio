@@ -3,91 +3,82 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio - Prace Graficzne</title>
-  <!-- Link do zewnętrznego pliku CSS -->
+  <meta name="description" content="Profesjonalne portfolio graficzne - kreatywne projekty i realizacje">
+  <title>Portfolio Graficzne</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!-- Przycisk przełączający motyw dzienny/nocny -->
-  <button class="theme-toggle" onclick="toggleTheme()">Tryb nocny</button>
+  <button type="button" class="theme-toggle" aria-label="Przełącznik trybu nocnego">Tryb nocny</button>
 
-  <!-- ============== NAGŁÓWEK ============== -->
   <header id="main-header">
     <div class="profile">
-      <!-- Zdjęcie profilowe (umieść obrazek w folderze assets) -->
-      <img src="assets/profile.jpg" alt="Profilowe">
-      <div class="info">Grafik</div>
+      <img src="assets/profile.jpg" alt="Zdjęcie profilowe grafika" loading="lazy" width="80" height="80">
+      <div class="info">Grafik Creative</div>
     </div>
-    <div class="contact-links">
-      <!-- Linki kontaktowe -->
-      <a href="mailto:example@example.com">Email</a>
-      <a href="tel:+48123456789">Telefon</a>
-      <a href="https://instagram.com" target="_blank">Instagram</a>
-    </div>
-    <!-- Interaktywny kafelek przekierowujący do strony z CV -->
-    <div class="cv-tile" onclick="window.location.href='https://pawelwyb.github.io/moje-cv/'">
-      Moje CV
+    <nav class="contact-links" aria-label="Dane kontaktowe">
+      <ul>
+        <li><a href="mailto:example@example.com" aria-label="Wyślij email">📧 Email</a></li>
+        <li><a href="tel:+48123456789" aria-label="Zadzwoń">📱 +48 123 456 789</a></li>
+        <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Profil Instagram">📸 Instagram</a></li>
+      </ul>
+    </nav>
+    <div class="cv-tile" id="cv-tile" role="button" tabindex="0" aria-label="Zobacz CV">
+      📄 Moje CV
     </div>
   </header>
 
-  <!-- ============== PANEL 1 ============== -->
-  <section class="panel left">
-    <h2>Marketing produktów</h2>
-    <div class="gallery-container" id="gallery1">
-      <!-- Nawigacja galerii -->
-      <div class="gallery-nav left" onclick="prevImage(1)">&#10094;</div>
-      <!-- Aktualnie wyświetlane zdjęcie -->
-      <img src="assets/marketing1.jpg" alt="Marketing 1">
-      <div class="gallery-nav right" onclick="nextImage(1)">&#10095;</div>
-    </div>
-  </section>
-  <div class="panel-description">Krótki opis zdjęć marketingowych. Zdjęcia ilustrują kreatywne projekty.</div>
+  <main>
+    <section class="panel">
+      <h2>Marketing produktów</h2>
+      <div class="gallery-container" id="gallery1">
+        <button class="gallery-nav left" data-gallery="1" data-action="prev" aria-label="Poprzednie zdjęcie">&#10094;</button>
+        <img src="assets/marketing1.jpg" alt="Projekt marketingowy 1" loading="lazy">
+        <button class="gallery-nav right" data-gallery="1" data-action="next" aria-label="Następne zdjęcie">&#10095;</button>
+      </div>
+      <p class="panel-description">Innowacyjne kampanie produktowe łączące kreatywność z efektywnością</p>
+    </section>
 
-  <!-- ============== PANEL 2 ============== -->
-  <section class="panel right">
-    <h2>Reklama internetowa</h2>
-    <div class="gallery-container" id="gallery2">
-      <div class="gallery-nav left" onclick="prevImage(2)">&#10094;</div>
-      <img src="assets/reklama1.jpg" alt="Reklama 1">
-      <div class="gallery-nav right" onclick="nextImage(2)">&#10095;</div>
-    </div>
-  </section>
-  <div class="panel-description">Krótkie opisy zdjęć z kampanii reklamowych. Wizualizacje innowacyjnych idei.</div>
+    <section class="panel">
+      <h2>Reklama internetowa</h2>
+      <div class="gallery-container" id="gallery2">
+        <button class="gallery-nav left" data-gallery="2" data-action="prev" aria-label="Poprzednie zdjęcie">&#10094;</button>
+        <img src="assets/reklama1.jpg" alt="Projekt reklamowy 1" loading="lazy">
+        <button class="gallery-nav right" data-gallery="2" data-action="next" aria-label="Następne zdjęcie">&#10095;</button>
+      </div>
+      <p class="panel-description">Digitalowe rozwiązania reklamowe zwiększające zaangażowanie</p>
+    </section>
 
-  <!-- ============== PANEL 3 ============== -->
-  <section class="panel left">
-    <h2>Branding</h2>
-    <div class="gallery-container" id="gallery3">
-      <div class="gallery-nav left" onclick="prevImage(3)">&#10094;</div>
-      <img src="assets/branding1.jpg" alt="Branding 1">
-      <div class="gallery-nav right" onclick="nextImage(3)">&#10095;</div>
-    </div>
-  </section>
-  <div class="panel-description">Zdjęcia przedstawiające proces kreacji marki. Eleganckie projekty graficzne.</div>
+    <section class="panel">
+      <h2>Branding</h2>
+      <div class="gallery-container" id="gallery3">
+        <button class="gallery-nav left" data-gallery="3" data-action="prev" aria-label="Poprzednie zdjęcie">&#10094;</button>
+        <img src="assets/branding1.jpg" alt="Projekt brandingowy 1" loading="lazy">
+        <button class="gallery-nav right" data-gallery="3" data-action="next" aria-label="Następne zdjęcie">&#10095;</button>
+      </div>
+      <p class="panel-description">Kompleksowe budowanie tożsamości marki</p>
+    </section>
 
-  <!-- ============== PANEL 4 ============== -->
-  <section class="panel right">
-    <h2>Social Media</h2>
-    <div class="gallery-container" id="gallery4">
-      <div class="gallery-nav left" onclick="prevImage(4)">&#10094;</div>
-      <img src="assets/social1.jpg" alt="Social 1">
-      <div class="gallery-nav right" onclick="nextImage(4)">&#10095;</div>
-    </div>
-  </section>
-  <div class="panel-description">Zdjęcia kampanii w mediach społecznościowych. Nowoczesne i dynamiczne kreacje.</div>
+    <section class="panel">
+      <h2>Social Media</h2>
+      <div class="gallery-container" id="gallery4">
+        <button class="gallery-nav left" data-gallery="4" data-action="prev" aria-label="Poprzednie zdjęcie">&#10094;</button>
+        <img src="assets/social1.jpg" alt="Projekt social media 1" loading="lazy">
+        <button class="gallery-nav right" data-gallery="4" data-action="next" aria-label="Następne zdjęcie">&#10095;</button>
+      </div>
+      <p class="panel-description">Wirusowe treści dostosowane do platform społecznościowych</p>
+    </section>
 
-  <!-- ============== PANEL 5 ============== -->
-  <section class="panel left">
-    <h2>Druk i Opakowania</h2>
-    <div class="gallery-container" id="gallery5">
-      <div class="gallery-nav left" onclick="prevImage(5)">&#10094;</div>
-      <img src="assets/druk1.jpg" alt="Druk 1">
-      <div class="gallery-nav right" onclick="nextImage(5)">&#10095;</div>
-    </div>
-  </section>
-  <div class="panel-description">Przykłady projektów drukowanych materiałów i opakowań. Profesjonalne wykonanie.</div>
+    <section class="panel">
+      <h2>Druk i Opakowania</h2>
+      <div class="gallery-container" id="gallery5">
+        <button class="gallery-nav left" data-gallery="5" data-action="prev" aria-label="Poprzednie zdjęcie">&#10094;</button>
+        <img src="assets/druk1.jpg" alt="Projekt drukarski 1" loading="lazy">
+        <button class="gallery-nav right" data-gallery="5" data-action="next" aria-label="Następne zdjęcie">&#10095;</button>
+      </div>
+      <p class="panel-description">Fizyczne realizacje z dbałością o detal</p>
+    </section>
+  </main>
 
-  <!-- Łączenie zewnętrznego pliku JavaScript -->
   <script src="js/script.js"></script>
 </body>
 </html>
