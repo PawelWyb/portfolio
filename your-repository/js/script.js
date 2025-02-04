@@ -1,16 +1,16 @@
-// Poczekaj aż DOM zostanie załadowany
+// Poczekaj na załadowanie zawartości dokumentu
 document.addEventListener("DOMContentLoaded", function() {
-  // Przycisk przełączający motyw
+  // Przełącznik motywu
   const themeToggleBtn = document.querySelector('.theme-toggle');
   themeToggleBtn.addEventListener('click', toggleTheme);
 
-  // Kliknięcie w kafelek CV
+  // Obsługa kliknięcia w kafelek CV
   const cvTile = document.getElementById('cv-tile');
   cvTile.addEventListener('click', function() {
     window.location.href = 'https://pawelwyb.github.io/moje-cv/';
   });
 
-  // Obsługa kliknięć na strzałki galerii
+  // Obsługa nawigacji w galeriach
   document.querySelectorAll('.gallery-nav').forEach(function(nav) {
     nav.addEventListener('click', function() {
       const galleryId = parseInt(this.getAttribute('data-gallery'));
@@ -31,12 +31,12 @@ function toggleTheme() {
   document.querySelectorAll('.panel').forEach(function(panel) {
     panel.classList.toggle('night');
   });
-  // Zmiana tekstu przycisku
+  // Aktualizacja tekstu przycisku
   const toggleBtn = document.querySelector('.theme-toggle');
   toggleBtn.textContent = document.body.classList.contains('night') ? 'Tryb dzienny' : 'Tryb nocny';
 }
 
-// Obiekt przechowujący listy zdjęć dla każdej galerii
+// Obiekt przechowujący listy zdjęć dla poszczególnych galerii
 const galleries = {
   1: ["assets/marketing1.jpg", "assets/marketing2.jpg", "assets/marketing3.jpg"],
   2: ["assets/reklama1.jpg", "assets/reklama2.jpg", "assets/reklama3.jpg"],
@@ -54,7 +54,7 @@ const currentImageIndex = {
   5: 0
 };
 
-// Funkcja przechodząca do następnego zdjęcia
+// Funkcja do przejścia do następnego zdjęcia
 function nextImage(galleryId) {
   currentImageIndex[galleryId]++;
   if (currentImageIndex[galleryId] >= galleries[galleryId].length) {
@@ -63,7 +63,7 @@ function nextImage(galleryId) {
   updateGalleryImage(galleryId);
 }
 
-// Funkcja przechodząca do poprzedniego zdjęcia
+// Funkcja do przejścia do poprzedniego zdjęcia
 function prevImage(galleryId) {
   currentImageIndex[galleryId]--;
   if (currentImageIndex[galleryId] < 0) {
