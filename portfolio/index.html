@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Prace Graficzne</title>
+  <!-- Link do zewnętrznego pliku CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Przycisk przełączający motyw dzienny/nocny -->
+  <button class="theme-toggle" onclick="toggleTheme()">Tryb nocny</button>
+
+  <!-- ============== NAGŁÓWEK ============== -->
+  <header id="main-header">
+    <div class="profile">
+      <!-- Zdjęcie profilowe (umieść obrazek w folderze assets) -->
+      <img src="assets/profile.jpg" alt="Profilowe">
+      <div class="info">Grafik</div>
+    </div>
+    <div class="contact-links">
+      <!-- Linki kontaktowe -->
+      <a href="mailto:example@example.com">Email</a>
+      <a href="tel:+48123456789">Telefon</a>
+      <a href="https://instagram.com" target="_blank">Instagram</a>
+    </div>
+    <!-- Interaktywny kafelek przekierowujący do strony z CV -->
+    <div class="cv-tile" onclick="window.location.href='https://pawelwyb.github.io/moje-cv/'">
+      Moje CV
+    </div>
+  </header>
+
+  <!-- ============== PANEL 1 ============== -->
+  <section class="panel left">
+    <h2>Marketing produktów</h2>
+    <div class="gallery-container" id="gallery1">
+      <!-- Nawigacja galerii -->
+      <div class="gallery-nav left" onclick="prevImage(1)">&#10094;</div>
+      <!-- Aktualnie wyświetlane zdjęcie -->
+      <img src="assets/marketing1.jpg" alt="Marketing 1">
+      <div class="gallery-nav right" onclick="nextImage(1)">&#10095;</div>
+    </div>
+  </section>
+  <div class="panel-description">Krótki opis zdjęć marketingowych. Zdjęcia ilustrują kreatywne projekty.</div>
+
+  <!-- ============== PANEL 2 ============== -->
+  <section class="panel right">
+    <h2>Reklama internetowa</h2>
+    <div class="gallery-container" id="gallery2">
+      <div class="gallery-nav left" onclick="prevImage(2)">&#10094;</div>
+      <img src="assets/reklama1.jpg" alt="Reklama 1">
+      <div class="gallery-nav right" onclick="nextImage(2)">&#10095;</div>
+    </div>
+  </section>
+  <div class="panel-description">Krótkie opisy zdjęć z kampanii reklamowych. Wizualizacje innowacyjnych idei.</div>
+
+  <!-- ============== PANEL 3 ============== -->
+  <section class="panel left">
+    <h2>Branding</h2>
+    <div class="gallery-container" id="gallery3">
+      <div class="gallery-nav left" onclick="prevImage(3)">&#10094;</div>
+      <img src="assets/branding1.jpg" alt="Branding 1">
+      <div class="gallery-nav right" onclick="nextImage(3)">&#10095;</div>
+    </div>
+  </section>
+  <div class="panel-description">Zdjęcia przedstawiające proces kreacji marki. Eleganckie projekty graficzne.</div>
+
+  <!-- ============== PANEL 4 ============== -->
+  <section class="panel right">
+    <h2>Social Media</h2>
+    <div class="gallery-container" id="gallery4">
+      <div class="gallery-nav left" onclick="prevImage(4)">&#10094;</div>
+      <img src="assets/social1.jpg" alt="Social 1">
+      <div class="gallery-nav right" onclick="nextImage(4)">&#10095;</div>
+    </div>
+  </section>
+  <div class="panel-description">Zdjęcia kampanii w mediach społecznościowych. Nowoczesne i dynamiczne kreacje.</div>
+
+  <!-- ============== PANEL 5 ============== -->
+  <section class="panel left">
+    <h2>Druk i Opakowania</h2>
+    <div class="gallery-container" id="gallery5">
+      <div class="gallery-nav left" onclick="prevImage(5)">&#10094;</div>
+      <img src="assets/druk1.jpg" alt="Druk 1">
+      <div class="gallery-nav right" onclick="nextImage(5)">&#10095;</div>
+    </div>
+  </section>
+  <div class="panel-description">Przykłady projektów drukowanych materiałów i opakowań. Profesjonalne wykonanie.</div>
+
+  <!-- Łączenie zewnętrznego pliku JavaScript -->
+  <script src="js/script.js"></script>
+</body>
+</html>
